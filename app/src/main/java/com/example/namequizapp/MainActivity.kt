@@ -1,12 +1,23 @@
 package com.example.namequizapp
 
-import android.content.Intent
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.provider.MediaStore
-import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.coroutineScope
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import com.example.namequizapp.data.AppDatabase
+import com.example.namequizapp.data.QuizEntryModel
+import com.example.namequizapp.data.QuizEntryRepository
 import com.example.namequizapp.databinding.ActivityMainBinding
+import com.example.namequizapp.utils.Constants
+import com.example.namequizapp.utils.ImageUtils.convertToString
+import com.example.namequizapp.viewmodels.QuizEntryViewModel
+import com.example.namequizapp.viewmodels.QuizEntryViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * Main activity. Welcome screen and provides navigation to other
@@ -14,43 +25,55 @@ import com.example.namequizapp.databinding.ActivityMainBinding
  */
 class MainActivity : AppCompatActivity() {
 
+    private val viewModel: QuizEntryViewModel by viewModels {
+        QuizEntryViewModelFactory(
+            QuizEntryRepository(
+                (AppDatabase.getDatabase(applicationContext) as AppDatabase).quizEntryDao()
+            )
+        )
+    }
+
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        populateDefaultEntries()
-        setContentView(R.layout.activity_main)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        setListeners()
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
+        supportActionBar?.hide()
+
+        populateDatabaseOnFirstLaunch()
     }
 
-    /**
-     * Populates the list of entries with default entries, in case of none being present
-     */
-    private fun populateDefaultEntries() {
-        if((application as QuizApp).quizEntries.size == 0){
-            (application as QuizApp).quizEntries = mutableListOf(
-                QuizEntry("Kenneth", BitmapFactory.decodeResource(resources, R.drawable.cat2)),
-                QuizEntry("Henning", BitmapFactory.decodeResource(resources, R.drawable.cat10)),
-                QuizEntry("Rosa", BitmapFactory.decodeResource(resources, R.drawable.cat7))
-            )
-        }
-    }
 
-    /**
-     * Initializes listeners to enable navigation to other activities
-     */
-    private fun setListeners(){
-        binding.btnQuizActivity.setOnClickListener {
-            startActivity(Intent(this, QuizActivity::class.java))
-        }
-        binding.btnDatabaseActivity.setOnClickListener {
-            startActivity(Intent(this, DatabaseActivity::class.java))
-        }
-        binding.btnNewEntryActivity.setOnClickListener {
-            startActivity(Intent(this, NewEntryActivity::class.java))
+    private fun populateDatabaseOnFirstLaunch() {
+        val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
+
+        if(sharedPref.getBoolean(Constants.FIRST_LAUNCH, true)) {
+
+            lifecycle.coroutineScope.launch(Dispatchers.IO) {
+                viewModel.insertQuizEntry(QuizEntryModel(
+                    name = "Jonas",
+                    image = BitmapFactory.decodeResource(resources, R.drawable.cat10).convertToString()
+                ))
+                viewModel.insertQuizEntry(QuizEntryModel(
+                    name = "Henning",
+                    image = BitmapFactory.decodeResource(resources, R.drawable.cat2).convertToString()
+                ))
+                viewModel.insertQuizEntry(QuizEntryModel(
+                    name = "Finn",
+                    image = BitmapFactory.decodeResource(resources, R.drawable.cat7).convertToString()
+                ))
+            }
+
+            with(sharedPref.edit()){
+                putBoolean(Constants.FIRST_LAUNCH, false)
+                apply()
+            }
         }
     }
 }

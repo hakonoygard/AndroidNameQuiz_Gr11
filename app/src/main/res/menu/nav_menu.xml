@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <item
+        android:title="@string/btn_edit_database_title"
+        android:icon="@drawable/ic_list_add"
+        android:iconTint="@color/black"
+        android:id="@+id/newEntryFragment"
+        android:menuCategory="secondary"
+        />
+
+    <item
+        android:title="@string/start_quiz"
+        android:icon="@drawable/ic_game"
+        android:iconTint="@color/black"
+        android:id="@+id/mainFragment"
+        android:menuCategory="secondary"
+        />
+
+    <item
+        android:title="@string/btn_database_title"
+        android:icon="@drawable/ic_list"
+        android:iconTint="@color/black"
+        android:id="@+id/entryOverviewFragment"
+        android:menuCategory="secondary"
+        />
+</menu>

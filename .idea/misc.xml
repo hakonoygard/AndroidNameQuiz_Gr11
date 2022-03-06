@@ -3,15 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/btn_background_correct.xml" value="0.1515" />
+        <entry key="app/src/main/res/drawable/btn_background_wrong.xml" value="0.1515" />
         <entry key="app/src/main/res/drawable/cat1.xml" value="0.1965" />
         <entry key="app/src/main/res/drawable/cat1_background.xml" value="0.1965" />
         <entry key="app/src/main/res/drawable/ic_baseline_sort_by_alpha_24.xml" value="0.272" />
+        <entry key="app/src/main/res/drawable/ic_continue_arrow.xml" value="0.1515" />
         <entry key="app/src/main/res/drawable/ic_fab_add.xml" value="0.272" />
         <entry key="app/src/main/res/layout/activity_database.xml" value="0.28679656982421875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_new_entry.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.2898550724637681" />
+        <entry key="app/src/main/res/layout/fragment_main.xml" value="0.21505376344086022" />
+        <entry key="app/src/main/res/layout/fragment_quiz.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/row_entry.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/temp_main.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/menu/nav_menu.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/cat2_round.xml" value="0.1965" />
       </map>
     </option>

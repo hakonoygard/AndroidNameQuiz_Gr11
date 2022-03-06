@@ -6,10 +6,14 @@
     <string name="btn_edit_database_title">Add entry</string>
     <string name="add_entry_hint">Name</string>
     <string name="btn_delete_text">Delete</string>
-    <string name="score">Score: %d</string>
-    <string name="attempts">Attempts: %d</string>
+    <string name="score">Score:</string>
+    <string name="attempts">Attempts:</string>
     <string name="completed_message">Your score was %1d points out of %2d attempts! Return to menu to start new game.</string>
     <string name="all_entries">All entries in database</string>
     <string name="wrong_answer">Wrong. The correct name was %s</string>
     <string name="correct_answer">Amazing! You chose the correct name.</string>
+    <string name="continue_quiz">Go to next quiz question</string>
+    <string name="not_enough_entries"> Three entries are required to play</string>
+
+    <string name="first_launch_key">FIRST_LAUNCH</string>
 </resources>

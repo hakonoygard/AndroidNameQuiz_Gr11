@@ -10,25 +10,30 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ImageView
         android:id="@+id/ivEntry"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:maxHeight="90dp"
-        app:layout_constraintStart_toEndOf="@id/tvName"
-        app:layout_constraintTop_toTopOf="@id/tvName"
+        android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toBottomOf="@id/tvName"
-        app:layout_constraintEnd_toStartOf="@id/btnSlett"/>
+        app:layout_constraintEnd_toStartOf="@id/btnSlett"
+        app:layout_constraintStart_toEndOf="@id/tvName"
+        app:layout_constraintTop_toTopOf="@id/tvName" />
     <Button
         android:id="@+id/btnSlett"
         android:text="@string/btn_delete_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/ic_delete"
+        android:drawableTint="@color/white"
+        android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvName"
         app:layout_constraintBottom_toBottomOf="@id/tvName"/>

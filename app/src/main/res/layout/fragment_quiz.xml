@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".QuizActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <TextView
@@ -33,24 +32,44 @@
         android:contentDescription="@string/app_name"/>
 
     <TextView
-        android:id="@+id/tvScore"
+        android:id="@+id/tvScoreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/ivImage"
         app:layout_constraintStart_toStartOf="@id/ivImage"
-        android:layout_margin="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
         android:textSize="20sp"
-        tools:text="Score: 0"/>
+        android:text="@string/score"/>
+    <TextView
+        android:id="@+id/tvScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/tvScoreText"
+        app:layout_constraintStart_toEndOf="@id/tvScoreText"
+        android:layout_marginStart="8dp"
+        android:textSize="20sp"
+        tools:text="0"/>
 
     <TextView
         android:id="@+id/tvAttempts"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/ivImage"
+        app:layout_constraintTop_toBottomOf="@id/ivImage"
+        tools:text="0" />
+    <TextView
+        android:id="@+id/tvAttemptsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/ivImage"
-        app:layout_constraintEnd_toEndOf="@id/ivImage"
-        android:layout_margin="15dp"
+        app:layout_constraintTop_toTopOf="@id/tvAttempts"
+        app:layout_constraintEnd_toStartOf="@id/tvAttempts"
+        android:layout_marginEnd="8dp"
         android:textSize="20sp"
-        tools:text="Attempts: 0"/>
+        android:text="@string/attempts" />
 
     <Button
         android:id="@+id/btnOption1"
@@ -81,19 +100,16 @@
         app:layout_constraintTop_toBottomOf="@+id/btnOption2"
         tools:text="Aiko"/>
 
-
-    <TextView
-        android:id="@+id/tvCompletedMessage"
-        android:textSize="18sp"
-        android:textColor="@color/black"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:gravity="center"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/continue_quiz"
+        android:src="@drawable/ic_continue_arrow"
         android:visibility="gone"
-        tools:text="Halla du spilte ganske bra"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
