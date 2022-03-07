@@ -44,10 +44,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnQuizActivity.setOnClickListener {
-            it.findNavController().navigate(R.id.action_mainFragment_to_quizFragment)
+            //it.findNavController().navigate(R.id.action_mainFragment_to_quizFragment)
         }
 
-        viewModel.quizEntries.observe(viewLifecycleOwner) {
+        viewModel.quizEntries.observe(this) {
             val quizReady = it.size >=3
 
             binding.btnQuizActivity.isEnabled = quizReady

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="@string/app_title" />
+
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="10dp"
+        tools:srcCompat="@tools:sample/avatars"
+        android:contentDescription="@string/app_name"/>
+
+    <TextView
+        android:id="@+id/tvScoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ivImage"
+        app:layout_constraintStart_toStartOf="@id/ivImage"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:textSize="20sp"
+        android:text="@string/score"/>
+    <TextView
+        android:id="@+id/tvScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/tvScoreText"
+        app:layout_constraintStart_toEndOf="@id/tvScoreText"
+        android:layout_marginStart="8dp"
+        android:textSize="20sp"
+        tools:text="0"/>
+
+    <TextView
+        android:id="@+id/tvAttempts"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/ivImage"
+        app:layout_constraintTop_toBottomOf="@id/ivImage"
+        tools:text="0" />
+    <TextView
+        android:id="@+id/tvAttemptsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/tvAttempts"
+        app:layout_constraintEnd_toStartOf="@id/tvAttempts"
+        android:layout_marginEnd="8dp"
+        android:textSize="20sp"
+        android:text="@string/attempts" />
+
+    <Button
+        android:id="@+id/btnOption1"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/btnOption2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Erlend" />
+
+    <Button
+        android:id="@+id/btnOption2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAttempts"
+        app:layout_constraintVertical_bias="0.39"
+        tools:text="Hilde" />
+
+    <Button
+        android:id="@+id/btnOption3"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnOption2"
+        tools:text="Aiko"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/continue_quiz"
+        android:src="@drawable/ic_continue_arrow"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
