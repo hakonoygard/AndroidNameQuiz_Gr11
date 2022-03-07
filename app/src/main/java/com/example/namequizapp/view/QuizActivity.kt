@@ -1,43 +1,39 @@
 package com.example.namequizapp.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import com.example.namequizapp.BaseFragment
-import com.example.namequizapp.R
 import com.example.namequizapp.data.AppDatabase
 import com.example.namequizapp.data.QuizEntryRepository
 import com.example.namequizapp.data.QuizQuestion
-import com.example.namequizapp.databinding.FragmentQuizBinding
+import androidx.lifecycle.Observer
+import com.example.namequizapp.R
+import com.example.namequizapp.databinding.ActivityQuizBinding
 import com.example.namequizapp.utils.Constants
 import com.example.namequizapp.utils.ImageUtils.convertToBitmap
 import com.example.namequizapp.viewmodels.QuizGameViewModel
 import com.example.namequizapp.viewmodels.QuizGameViewModelFactory
 
-class QuizFragment : BaseFragment<FragmentQuizBinding>() {
+class QuizActivity : AppCompatActivity() {
 
-    override fun getViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentQuizBinding {
-        return FragmentQuizBinding.inflate(inflater, container, false)
-    }
+    private lateinit var binding : ActivityQuizBinding
 
-    private val viewModel: QuizGameViewModel by activityViewModels {
-        QuizGameViewModelFactory(
-            QuizEntryRepository((AppDatabase.getDatabase(requireContext()) as AppDatabase).quizEntryDao())
-        )
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityQuizBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         initializeObservers()
         initializeClickListeners()
         viewModel.fetchQuizEntries()
+    }
+
+    val viewModel: QuizGameViewModel by viewModels {
+        QuizGameViewModelFactory(
+            QuizEntryRepository((AppDatabase.getDatabase(applicationContext) as AppDatabase).quizEntryDao())
+        )
     }
 
     private fun initializeClickListeners() {
@@ -60,38 +56,38 @@ class QuizFragment : BaseFragment<FragmentQuizBinding>() {
     }
 
     private fun initializeObservers() {
-        viewModel.quizEntries.observe(viewLifecycleOwner){ viewModel.newGame() }
+        viewModel.quizEntries.observe(this){ viewModel.newGame() }
 
-        viewModel.quizQuestion.observe(viewLifecycleOwner, quizQuestionObserver)
+        viewModel.quizQuestion.observe(this, quizQuestionObserver)
 
-        viewModel.score.observe(viewLifecycleOwner) {
+        viewModel.score.observe(this) {
             binding.tvScore.text = it.toString()
         }
 
-        viewModel.attempts.observe(viewLifecycleOwner) {
+        viewModel.attempts.observe(this) {
             binding.tvAttempts.text = it.toString()
         }
 
-        viewModel.btnOneColor.observe(viewLifecycleOwner) {
+        viewModel.btnOneColor.observe(this) {
             binding.btnOption1.setBackgroundColor(
-                ContextCompat.getColor(requireContext(), resolveColor(it)))
+                ContextCompat.getColor(applicationContext, resolveColor(it)))
         }
 
-        viewModel.btnTwoColor.observe(viewLifecycleOwner) {
+        viewModel.btnTwoColor.observe(this) {
             binding.btnOption2.setBackgroundColor(
-                ContextCompat.getColor(requireContext(), resolveColor(it)))
+                ContextCompat.getColor(applicationContext, resolveColor(it)))
         }
 
-        viewModel.btnThreeColor.observe(viewLifecycleOwner) {
+        viewModel.btnThreeColor.observe(this) {
             binding.btnOption3.setBackgroundColor(
-                ContextCompat.getColor(requireContext(), resolveColor(it)))
+                ContextCompat.getColor(applicationContext, resolveColor(it)))
         }
 
-        viewModel.continueBtnVisibility.observe(viewLifecycleOwner){
+        viewModel.continueBtnVisibility.observe(this){
             binding.fab.visibility = if(it) View.VISIBLE else View.GONE
         }
 
-        viewModel.answerButtonsEnabled.observe(viewLifecycleOwner){
+        viewModel.answerButtonsEnabled.observe(this){
             binding.btnOption1.isEnabled = it
             binding.btnOption2.isEnabled = it
             binding.btnOption3.isEnabled = it

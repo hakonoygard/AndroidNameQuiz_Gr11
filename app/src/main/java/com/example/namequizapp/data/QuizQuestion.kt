@@ -4,5 +4,6 @@ data class QuizQuestion(
     val image: String,
     val optionOne: String,
     val optionTwo: String,
-    val optionThree: String
+    val optionThree: String,
+    val correct: QuizEntryModel
 )

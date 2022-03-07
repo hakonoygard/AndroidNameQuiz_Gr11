@@ -93,7 +93,8 @@ class QuizGameViewModel(private val repository: QuizEntryRepository) : ViewModel
                     image = this.image,
                     optionOne = listOfOptions[0],
                     optionTwo= listOfOptions[1],
-                    optionThree = listOfOptions[2]
+                    optionThree = listOfOptions[2],
+                    correct = this
                 )
 
                 if (currentIndex == (quizEntries.value?.size?.minus(1))) currentIndex = 0 else currentIndex++
