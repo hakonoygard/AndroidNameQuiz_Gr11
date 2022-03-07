@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.namequizapp.databinding.RowEntryBinding
 import com.example.namequizapp.utils.ImageUtils.convertToBitmap
 
-class EntryAdapterNew(
+class EntryAdapter(
     private val onItemClicked: (QuizEntryModel) -> Unit
-) : ListAdapter<QuizEntryModel, EntryAdapterNew.EntryAdapterNewViewHolder>(DiffCallback){
+) : ListAdapter<QuizEntryModel, EntryAdapter.EntryAdapterNewViewHolder>(DiffCallback){
 
 
     companion object {

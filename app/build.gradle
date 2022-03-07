@@ -101,7 +101,6 @@ dependencies {
     def espressoVersion = "3.4.0"
     // Espresso dependencies
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
 
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
 

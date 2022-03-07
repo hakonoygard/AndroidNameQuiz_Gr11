@@ -1,4 +1,4 @@
-package com.example.namequizapp
+package com.example.namequizapp.view
 
 import android.content.Context
 import android.content.Intent
@@ -7,18 +7,16 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.coroutineScope
+import com.example.namequizapp.R
 import com.example.namequizapp.data.AppDatabase
 import com.example.namequizapp.data.QuizEntryModel
 import com.example.namequizapp.data.QuizEntryRepository
 import com.example.namequizapp.databinding.ActivityMainBinding
-import com.example.namequizapp.databinding.ActivityQuizBinding
 import com.example.namequizapp.utils.Constants
 import com.example.namequizapp.utils.ImageUtils.convertToString
 import com.example.namequizapp.viewmodels.QuizEntryViewModel
 import com.example.namequizapp.viewmodels.QuizEntryViewModelFactory
-import com.example.namequizapp.viewmodels.QuizGameViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -43,19 +41,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-        // Skal fjernes
-      /*  val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
-        supportActionBar?.hide()*/
-
-        supportActionBar?.hide()
         populateDatabaseOnFirstLaunch()
         setUpListeners()
 
-        Log.d("TAG",QuizActivity::class.java.name)
+        Log.d("TAG", QuizActivity::class.java.name)
     }
 
     private fun setUpListeners(){

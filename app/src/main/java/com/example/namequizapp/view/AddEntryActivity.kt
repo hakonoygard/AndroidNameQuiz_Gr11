@@ -1,4 +1,4 @@
-package com.example.namequizapp
+package com.example.namequizapp.view
 
 import android.app.Activity
 import android.content.Context
@@ -9,23 +9,17 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
 import android.view.KeyEvent
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.coroutineScope
-import androidx.navigation.findNavController
 import com.example.namequizapp.data.AppDatabase
 import com.example.namequizapp.data.QuizEntryModel
 import com.example.namequizapp.data.QuizEntryRepository
 import com.example.namequizapp.databinding.ActivityAddEntryBinding
-import com.example.namequizapp.databinding.ActivityQuizBinding
-import com.example.namequizapp.databinding.FragmentNewEntryBinding
 import com.example.namequizapp.utils.ImageUtils.convertToString
 import com.example.namequizapp.viewmodels.QuizEntryViewModel
 import com.example.namequizapp.viewmodels.QuizEntryViewModelFactory
@@ -72,8 +66,6 @@ class AddEntryActivity : AppCompatActivity() {
 
     private lateinit var imageUri: Uri
 
-
-
     /**
      * Function to check if image and name are provided before saving to database
      */
@@ -109,10 +101,9 @@ class AddEntryActivity : AppCompatActivity() {
             ).show()
 
 
-        startActivity(Intent(applicationContext,AddEntryActivity::class.java))
+        startActivity(Intent(applicationContext, DatabaseActivity::class.java))
 
     }
-
 
     /**
      * Listener for successful fetch of image from phone gallery

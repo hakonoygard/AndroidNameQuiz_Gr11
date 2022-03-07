@@ -10,20 +10,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NameQuizApp">
         <activity
-            android:name=".AddEntryActivity"
-            android:exported="false" />
+            android:name=".view.AddEntryActivity"
+            android:exported="false">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter></activity>
         <activity
-            android:name=".DatabaseActivity"
-            android:exported="false" />
+            android:name=".view.DatabaseActivity"
+            android:exported="false">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
-            android:name=".QuizActivity"
-            android:exported="false" />
+            android:name=".view.QuizActivity"
+            android:exported="false">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
