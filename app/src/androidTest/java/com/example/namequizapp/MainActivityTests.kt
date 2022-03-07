@@ -38,6 +38,9 @@ class ExampleInstrumentedTest {
         scenario = rule.scenario
     }
 
+    /**
+     * Function to test navigation from main activity to database activity
+     */
     @Test
     fun testDatabaseNavigation() {
         Intents.init()

@@ -6,6 +6,9 @@ import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * The Data Access Object for the Plant class.
+ */
 @Dao
 interface QuizEntryDao {
     @Query("SELECT * FROM quizentrymodel ORDER BY uid")

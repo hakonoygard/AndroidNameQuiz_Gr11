@@ -16,6 +16,9 @@ import com.example.namequizapp.utils.ImageUtils.convertToBitmap
 import com.example.namequizapp.viewmodels.QuizGameViewModel
 import com.example.namequizapp.viewmodels.QuizGameViewModelFactory
 
+/**
+ * Activity for playing the quiz
+ */
 class QuizActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityQuizBinding
@@ -36,6 +39,9 @@ class QuizActivity : AppCompatActivity() {
         )
     }
 
+    /**
+     * Sets up the onclick listeners for all buttons in the quiz activity
+     */
     private fun initializeClickListeners() {
         binding.btnOption1.setOnClickListener(btnListener)
         binding.btnOption2.setOnClickListener(btnListener)
@@ -55,6 +61,9 @@ class QuizActivity : AppCompatActivity() {
         viewModel.checkIfCorrect(answer as String)
     }
 
+    /**
+     * Sets up all observers for the quiz
+     */
     private fun initializeObservers() {
         viewModel.quizEntries.observe(this){ viewModel.newGame() }
 
@@ -95,6 +104,9 @@ class QuizActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Returns the correct color value depending on the button color
+     */
     private fun resolveColor(color : Constants.BUTTON_COLORS): Int {
         return when(color) {
             Constants.BUTTON_COLORS.RED -> R.color.red

@@ -13,6 +13,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
 
+/**
+ * ViewModel for handling the logic of the QuizEntryRepository
+ */
 class QuizEntryViewModel(private val repository: QuizEntryRepository) : ViewModel() {
 
     var sortAsc : Boolean = true
@@ -29,7 +32,9 @@ class QuizEntryViewModel(private val repository: QuizEntryRepository) : ViewMode
 }
 
 
-
+/**
+ * Builds the ViewModel to make accessible for other classes
+ */
 class QuizEntryViewModelFactory(
     private val repository: QuizEntryRepository
 ) : ViewModelProvider.Factory {

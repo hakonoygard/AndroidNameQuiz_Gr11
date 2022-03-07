@@ -36,6 +36,9 @@ class DatabaseActivityTests {
     }
 
 
+    /**
+     * Function for testing deleting of an entry in the database
+     */
     @Test
     fun testDeletingEntry() {
 

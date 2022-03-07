@@ -43,6 +43,9 @@ class AddEntryActivityTests {
         scenario = rule.scenario
     }
 
+    /**
+     * Function for testing adding a new entry in the database
+     */
     @Test
     fun givenCorrectData_AddingEntry_ResultsInExtraEntry() {
         Intents.init()

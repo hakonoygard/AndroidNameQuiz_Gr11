@@ -29,6 +29,9 @@ class QuizActivityTests {
         scenario = rule.scenario
     }
 
+    /**
+     * Function to test if correct answer gives increase in score counter
+     */
     @Test
     fun givenCorrectAnswerProvided_ScoreIsIncremented() {
         var correctAnswer = ""
@@ -41,6 +44,9 @@ class QuizActivityTests {
         onView(allOf(withId(R.id.tvScore), withText("1"))).check(matches(isDisplayed()))
     }
 
+    /**
+     * Function to test that wrong answer does not increase score counter
+     */
     @Test
     fun givenWrongAnswerProvided_ScoreIsIncremented() {
         var wrongAnswer = ""

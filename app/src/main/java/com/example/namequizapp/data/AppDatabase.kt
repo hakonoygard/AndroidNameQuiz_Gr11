@@ -5,6 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
+/**
+ * The Room database for this application
+ */
 @Database(entities = [QuizEntryModel::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 

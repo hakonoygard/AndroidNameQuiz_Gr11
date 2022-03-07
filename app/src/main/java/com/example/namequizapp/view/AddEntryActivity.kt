@@ -26,9 +26,13 @@ import com.example.namequizapp.viewmodels.QuizEntryViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * Activity that handles adding new entries(image,name) to the database
+ */
 class AddEntryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddEntryBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

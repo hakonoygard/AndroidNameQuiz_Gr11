@@ -47,6 +47,9 @@ class MainActivity : AppCompatActivity() {
         Log.d("TAG", QuizActivity::class.java.name)
     }
 
+    /**
+     * Enables onclick listeners for the three buttons on the homescreen
+     */
     private fun setUpListeners(){
 
         binding.btnStartQuiz.setOnClickListener {
@@ -62,6 +65,10 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    /**
+     * Function to populate the Room Database.
+     * This will only happen if the database has not been populated before.
+     */
     private fun populateDatabaseOnFirstLaunch() {
         val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
 

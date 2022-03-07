@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.namequizapp.databinding.RowEntryBinding
 import com.example.namequizapp.utils.ImageUtils.convertToBitmap
 
+/**
+ * This class handles the recycler view adapter
+ */
 class EntryAdapter(
     private val onItemClicked: (QuizEntryModel) -> Unit
 ) : ListAdapter<QuizEntryModel, EntryAdapter.EntryAdapterNewViewHolder>(DiffCallback){
@@ -31,6 +34,7 @@ class EntryAdapter(
             }
         }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryAdapterNewViewHolder {
 

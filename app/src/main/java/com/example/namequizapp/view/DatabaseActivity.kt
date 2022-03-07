@@ -17,6 +17,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+/**
+ * Activity that shows a recyclerview of the database
+ */
 class DatabaseActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDatabaseBinding
@@ -56,6 +59,11 @@ class DatabaseActivity : AppCompatActivity() {
         )
     }
 
+    /**
+     * Function to populate the recyclerview using code routines. Allows this to happen on a seperate thread
+     *
+     * @param entryAdapter holds implementation of recyclerview
+     */
     private fun populateRecyclerView(entryAdapter: EntryAdapter) {
         lifecycle.coroutineScope.launch{
             viewModel.getAllEntries().collect { entries ->

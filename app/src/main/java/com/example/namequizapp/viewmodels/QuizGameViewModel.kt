@@ -9,6 +9,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel for handling quiz logic
+ */
 class QuizGameViewModel(private val repository: QuizEntryRepository) : ViewModel() {
 
     private var currentIndex = 0
@@ -57,10 +60,17 @@ class QuizGameViewModel(private val repository: QuizEntryRepository) : ViewModel
     private var correct : QuizEntryModel? = null
 
 
+    /**
+     * Function for fetching all entries from the repository
+     * @return list of all entries
+     */
     private fun getAllEntries() : Flow<List<QuizEntryModel>> =
         repository.getAllQuizEntries()
 
 
+    /**
+     * Function to initialize the list of all image names
+     */
     fun fetchQuizEntries(){
         viewModelScope.launch {
             getAllEntries().collect {
@@ -73,7 +83,9 @@ class QuizGameViewModel(private val repository: QuizEntryRepository) : ViewModel
     }
 
 
-
+    /**
+     * Function to set up the view and values required for the next quiz question
+     */
     fun getNextQuizQuestion() {
         _continueBtnVisibility.value = false
         _btnOneColor.value = Constants.BUTTON_COLORS.GRAY
@@ -103,7 +115,10 @@ class QuizGameViewModel(private val repository: QuizEntryRepository) : ViewModel
     }
 
 
-
+    /**
+     * Function to check if submitted answer is correct and increments score if so
+     * @param answer the answer given by the user
+     */
     fun checkIfCorrect(answer: String) {
         _attempts.value = _attempts.value?.plus(1)
         if (answer == correct?.name ?: "Wrong")
@@ -120,6 +135,12 @@ class QuizGameViewModel(private val repository: QuizEntryRepository) : ViewModel
 
     }
 
+    /**
+     * Function to update the colors of the buttons depending on the given answer
+     * Checks if given answer corresponds to the button value
+     * @param answer answer given by the user
+     * @param value value of the button
+     */
     private fun updateButtonColor(answer: String, value: String) : Constants.BUTTON_COLORS {
 
         if(value == answer){
@@ -131,6 +152,9 @@ class QuizGameViewModel(private val repository: QuizEntryRepository) : ViewModel
         else Constants.BUTTON_COLORS.GRAY
     }
 
+    /**
+     * Function to initialize a new game
+     */
     fun newGame() {
         _attempts.value = 0
         _score.value = 0
@@ -139,7 +163,9 @@ class QuizGameViewModel(private val repository: QuizEntryRepository) : ViewModel
     }
 }
 
-
+/**
+ * Builds the ViewModel to make accessible for other classes
+ */
 class QuizGameViewModelFactory(
     private val repository: QuizEntryRepository
 ) : ViewModelProvider.Factory {
