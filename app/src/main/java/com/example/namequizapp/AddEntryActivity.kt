@@ -1,4 +1,4 @@
-package com.example.namequizapp.view
+package com.example.namequizapp
 
 import android.app.Activity
 import android.content.Context
@@ -15,15 +15,16 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.Fragment
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.coroutineScope
 import androidx.navigation.findNavController
-import com.example.namequizapp.BaseFragment
-import com.example.namequizapp.R
 import com.example.namequizapp.data.AppDatabase
 import com.example.namequizapp.data.QuizEntryModel
 import com.example.namequizapp.data.QuizEntryRepository
+import com.example.namequizapp.databinding.ActivityAddEntryBinding
+import com.example.namequizapp.databinding.ActivityQuizBinding
 import com.example.namequizapp.databinding.FragmentNewEntryBinding
 import com.example.namequizapp.utils.ImageUtils.convertToString
 import com.example.namequizapp.viewmodels.QuizEntryViewModel
@@ -31,28 +32,15 @@ import com.example.namequizapp.viewmodels.QuizEntryViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NewEntryFragment : BaseFragment<FragmentNewEntryBinding>() {
+class AddEntryActivity : AppCompatActivity() {
 
-    override fun getViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentNewEntryBinding {
-        return FragmentNewEntryBinding.inflate(inflater, container, false)
-    }
+    private lateinit var binding: ActivityAddEntryBinding
 
-    private val viewModel: QuizEntryViewModel by activityViewModels {
-        QuizEntryViewModelFactory(
-            QuizEntryRepository((AppDatabase.getDatabase(requireContext()) as AppDatabase).quizEntryDao())
-        )
-    }
-
-    private var inputName: Editable? = null
-
-    private lateinit var imageUri: Uri
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityAddEntryBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         binding.ivNewImage.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -61,7 +49,7 @@ class NewEntryFragment : BaseFragment<FragmentNewEntryBinding>() {
         binding.btnSubmit.setOnClickListener{
             validateInputBeforeSubmit()
         }
-        
+
         binding.inputTextName.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 binding.inputTextName.hideKeyboard()
@@ -73,6 +61,19 @@ class NewEntryFragment : BaseFragment<FragmentNewEntryBinding>() {
     }
 
 
+
+    private val viewModel: QuizEntryViewModel by viewModels {
+        QuizEntryViewModelFactory(
+            QuizEntryRepository((AppDatabase.getDatabase(applicationContext) as AppDatabase).quizEntryDao())
+        )
+    }
+
+    private var inputName: Editable? = null
+
+    private lateinit var imageUri: Uri
+
+
+
     /**
      * Function to check if image and name are provided before saving to database
      */
@@ -81,7 +82,7 @@ class NewEntryFragment : BaseFragment<FragmentNewEntryBinding>() {
         if(inputName != null && this::imageUri.isInitialized){
             saveImage()
         } else {
-            Toast.makeText(context,
+            Toast.makeText(applicationContext,
                 "Please provide image and name.",
                 Toast.LENGTH_SHORT
             ).show()
@@ -92,9 +93,8 @@ class NewEntryFragment : BaseFragment<FragmentNewEntryBinding>() {
      * Stores image to shared variable and redirects to database activity.
      */
     private fun saveImage() {
-        activity?.let {
             val bitmap =
-                ImageDecoder.decodeBitmap(ImageDecoder.createSource(it.contentResolver, imageUri))
+                ImageDecoder.decodeBitmap(ImageDecoder.createSource(this.contentResolver, imageUri))
             lifecycle.coroutineScope.launch(Dispatchers.IO){
                 viewModel.insertQuizEntry(
                     QuizEntryModel(
@@ -103,13 +103,13 @@ class NewEntryFragment : BaseFragment<FragmentNewEntryBinding>() {
                     )
                 )
             }
-            Toast.makeText(context,
+            Toast.makeText(applicationContext,
                 "Successfully added entry!",
                 Toast.LENGTH_SHORT
             ).show()
-        }
 
-        //view?.findNavController()?.navigate(R.id.action_newEntryFragment_to_entryOverviewFragment)
+
+        startActivity(Intent(applicationContext,AddEntryActivity::class.java))
 
     }
 

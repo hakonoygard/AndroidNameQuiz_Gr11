@@ -9,6 +9,9 @@ import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.intent.Intents.intended
+import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
+import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -44,9 +47,18 @@ class ExampleInstrumentedTest {
     }
 
     @Test
-    fun testNavigation() {
-        onView(withId(R.id.entryOverviewFragment)).perform(click())
-        onView(withId(R.id.entryOverviewFragment)).check(matches(isDisplayed()))
+    fun testQuizActivityNavigation() {
+        //Click on "Start Quiz" button to go to QuizActivity
+        onView(withId(R.id.btnStartQuiz)).perform(click())
+        //Check if intent with QuizActivity has been launched
+        //onView(withId(R.id.ivImage)).check(matches(isDisplayed()))
+
+
+        intended(hasAction("android.intent.category.LAUNCHER"))
+    }
+
+    @Test
+    fun testAddEntryActivityNavigation(){
     }
 
     @Test
