@@ -5,6 +5,7 @@ import android.app.Instrumentation
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
@@ -18,6 +19,10 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.namequizapp.view.AddEntryActivity
+import junit.framework.Assert.assertEquals
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.junit.Before
@@ -50,6 +55,18 @@ class AddEntryActivityTests {
     fun givenCorrectData_AddingEntry_ResultsInExtraEntry() {
         Intents.init()
 
+        var countEntries = 0
+        var countEntriesNew = 0
+
+
+        scenario.onActivity {
+            it.lifecycle.coroutineScope.launch {
+                it.viewModel.getAllEntries().collectLatest { list ->
+                    countEntries = list.size
+                }
+            }
+        }
+
         val testName = "Test" + Random.nextInt(0, 1000)
         val uri = Uri.parse("android.resource://com.example.namequizapp/drawable/cat10")
         val resultData = Intent()
@@ -64,9 +81,19 @@ class AddEntryActivityTests {
             closeSoftKeyboard()
         )
         onView(withId(R.id.btnSubmit)).perform(click())
-        onView(withId(R.id.rvEntries)).check(matches(hasItem(hasDescendant(withText(testName)))))
 
         Intents.release()
+        Thread.sleep(1000)
+        scenario.onActivity {
+            it.lifecycle.coroutineScope.launch {
+                it.viewModel.getAllEntries().collectLatest { list ->
+                    countEntriesNew = list.size
+                }
+                assertEquals(countEntries+1, countEntriesNew)
+            }
+        }
+
+        onView(withId(R.id.rvEntries)).check(matches(hasItem(hasDescendant(withText(testName)))))
     }
 }
 

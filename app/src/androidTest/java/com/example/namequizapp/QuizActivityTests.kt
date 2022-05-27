@@ -48,7 +48,7 @@ class QuizActivityTests {
      * Function to test that wrong answer does not increase score counter
      */
     @Test
-    fun givenWrongAnswerProvided_ScoreIsIncremented() {
+    fun givenWrongAnswerProvided_ScoreIsNotIncremented() {
         var wrongAnswer = ""
 
         scenario.onActivity {

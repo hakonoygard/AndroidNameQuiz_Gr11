@@ -11,25 +11,13 @@
         android:theme="@style/Theme.NameQuizApp">
         <activity
             android:name=".view.AddEntryActivity"
-            android:exported="false">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter></activity>
+            android:exported="false"/>
         <activity
             android:name=".view.DatabaseActivity"
-            android:exported="false">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".view.QuizActivity"
-            android:exported="false">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+            android:exported="false"/>
         <activity
             android:name=".view.MainActivity"
             android:exported="true">

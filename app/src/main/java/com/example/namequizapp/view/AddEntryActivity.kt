@@ -60,7 +60,7 @@ class AddEntryActivity : AppCompatActivity() {
 
 
 
-    private val viewModel: QuizEntryViewModel by viewModels {
+    val viewModel: QuizEntryViewModel by viewModels {
         QuizEntryViewModelFactory(
             QuizEntryRepository((AppDatabase.getDatabase(applicationContext) as AppDatabase).quizEntryDao())
         )
